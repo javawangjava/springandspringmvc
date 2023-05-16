@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    在xml配置文件中使用bean标签来定义bean对象-->
+    <!--
+        bean标签：表示配置bean
+        1.bean的id属性是bean对象的唯一标识。bean的id是bean对象所在的实现类类名，或者对象的实现类的父接口的接口名【一般选接口名，这样后面实现类重写也会解耦合】，注意id是小驼峰，类名接口名是大驼峰。
+        bean在IOC容器中的默认名称就是将类名或者实现类的父接口名的大驼峰改为对应的小驼峰。
+        2.bean对象的属性class表示bean对象的类型，class就是bean对象所在的实现类的类型，这里写实现类的全路径类名(实现类参才能实例化创建对象，接口不能创建对象)。
+    -->
+
+
+    <!--  在bean对象的id对应的实现类中声明了简单类型的变量，在xml文件中利用constructor-arg标签来设置name属性和value属性。
+            constructor-arg标签：表示配置当前bean的属性。
+            name属性：表示配置哪一个具体的属性,name属性是当前bean中id对应的实现类的有参构造器的形参名。
+            value属性:表示给简单类型变量（包括基本数据类型和String)设置的参数值。
+            注意constructor-arg标签中变量类型和变量名顺序与bean对象的id对应的实现类中构造器形参列表顺序一一对应。
+    -->
+
+        <!--  下面是在bean对象accountDao中声明了简单类型的变量，在xml文件中利用constructor-arg标签来设置name属性和value属性-->
+        <bean id="userDao" class="com.wang.dao.impl.UserDaoImpl">
+            <constructor-arg name="userName" value="李四"/>
+            <constructor-arg name="userId" value="120"/>
+        </bean>
+
+
+        <!--  在bean对象的id对应的实现类中声明了引用类型的变量，在xml文件中利用constructor-arg标签来设置name属性和ref属性。
+                 constructor-arg标签：表示配置当前bean的属性。
+                name属性：表示配置哪一个具体的属性,name属性是当前bean中id对应的实现类的有参构造器的形参名。
+                ref属性：表示参照哪一个bean,ref对应的是另一个bean对象的id【通过id找bean对象】.
+        -->
+        <!--  下面是引用类型变量的配置。将非本类的对象看作本类对象的实例成员变量【属性】。
+        在bean对象accountService中声明了引用类型的变量accountDao，在xml文件中利用property标签来设置name属性和ref属性-->
+
+        <bean id="userService" class="com.wang.service.impl.UserServiceImpl">
+            <constructor-arg name="userDao" ref="userDao"/>
+        </bean>
+
+
+    <!-- 构造器参数适配 构造器注入方式的23都是对方式1的补充-->
+    <!-- 构造器注入方式2：在xml配置中使用constructor-arg 标签的index属性将形参注入,index使用下标来区分参数-->
+    <!--  下面是在bean对象accountDao中声明了简单类型的变量，在xml文件中利用constructor-arg标签来设置name属性和value属性-->
+<!--    <bean id="userDao" class="com.wang.dao.impl.UserDaoImpl">-->
+<!--        &lt;!&ndash;  使用形参列表索引index来区分形参不要用顺序一一对应，本身就通过形参的位置来确定了，索引从下标0开始&ndash;&gt;-->
+<!--        <constructor-arg index="1" value="200"/>-->
+<!--        <constructor-arg index="0" value="王五"/>-->
+<!--        &lt;!&ndash; <constructor-arg index="1" value="200"/>&ndash;&gt;-->
+<!--    </bean>-->
+
+<!--    <bean id="userService" class="com.wang.service.impl.UserServiceImpl">-->
+<!--        <constructor-arg index="0" ref="userDao"/>-->
+<!--    </bean>-->
+
+
+
+    <!--  构造器注入方式3：在xml配置中使用constructor-arg 标签的type属性将形参注入  type 使用参数类型来区分参数-->
+    <!-- 基本数据类型就写基本数据类型就可以，引用数据类型就写所在类的全类名【这里包括String类型】    -->
+<!--    <bean id="userDao" class="com.wang.dao.impl.UserDaoImpl">-->
+<!--        <constructor-arg type="java.lang.String" value="赵六"/>-->
+<!--        <constructor-arg type="int" value="300"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="userService" class="com.wang.service.impl.UserServiceImpl">-->
+<!--        <constructor-arg type="com.wang.dao.UserDao" ref="userDao"/>-->
+<!--    </bean>-->
+
+</beans>

@@ -1,0 +1,5 @@
+com\wang\domain\Address.class
+com\wang\domain\Student.class
+com\wang\controller\StudentRequestParamController.class
+com\wang\config\SpringMvcConfig.class
+com\wang\config\ServletContainersInitConfig.class

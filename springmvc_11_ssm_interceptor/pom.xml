@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>springmvc_11_ssm_interceptor</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <build>
+    <plugins>
+      <!--Tomcat插件 -->
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <!--  访问端口号  -->
+          <port>80</port>
+          <!--  项目访问路径   -->
+          <path>/</path>
+          <!--  tomcat 8.5版本之后GET请求就不再出现中文乱码问题，但是我们使用的是tomcat7插件，所以会出现GET请求中文乱码问题。-->
+          <!--  在pom.xml添加tomcat7插件处配置UTF-8字符集，解决GET请求中文乱码问题             -->
+          <uriEncoding>UTF-8</uriEncoding><!--访问路径编解码字符集-->
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <!--  缺少发行源，先将<source>17</source>设置为<source>8</source>运行一次，再换成17，或者全部用8-->
+          <!-- 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中不能使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
+          <source>8</source> <!-- 源代码使用的JDK版本 -->
+          <target>8</target> <!-- 需要生成的目标class文件的编译版本 -->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.2.23.RELEASE</version>
+    </dependency>
+
+    <!-- mysql 数据库查询语言  结构化查询语言     -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.46</version>
+      <!-- <version>8.0.23</version>版本和写的代码有部分不兼容，需要更改部分代码     -->
+      <!--      <version>8.0.23</version>-->
+    </dependency>
+
+    <!--  导入Spring整合jdbc依赖  Java DataBase Connectivity ) Java 数据库连接-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>5.2.10.RELEASE</version>
+    </dependency>
+
+    <!--  druid数据库连接池      -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.23</version>
+    </dependency>
+
+    <!-- mybatis持久层框架，简化JDBC开发       -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.6</version>
+    </dependency>
+
+    <!--  导入Spring整合Mybatis依赖-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+
+    <!-- 整合某一个第三方bean，那么首先先要由第三方bean-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--  spring整合junit  -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>5.2.10.RELEASE</version>
+    </dependency>
+
+
+    <!--SpringMVC是web框架 需要spring-webmvc和javax.servlet-api-->
+    <!--servlet-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+      <!-- <scope>provided</scope>-->
+    </dependency>
+
+    <!--springmvc-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>5.2.10.RELEASE</version>
+    </dependency>
+
+    <!-- json数据转换相关坐标 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+
+  </dependencies>
+
+</project>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--在applicationContext.xml中开启开启context命名空间方法：
+        (xmlns:context=)是由(xmlns=)修改的，注意对比。
+        (http://www.springframework.org/schema/context)是由(http://www.springframework.org/schema/beans)修改的，注意对比。
+        ( http://www.springframework.org/schema/context/spring-context.xsd)是由(http://www.springframework.org/schema/beans/spring-beans.xsd)修改的，注意对比。
+    -->
+
+    <!--使用xml配置文件和properties属性文件来配置DruidDataSource连接池Bean对象，这里的value属性是可以使用properties配置文件进行传递-->
+    <!--    【步骤一】：编写jdbc.properties属性文件-->
+    <!--    【步骤二】：在applicationContext.xml中开启开启context命名空间-->
+    <!--    【步骤三】： 在applicationContext.xml中加载jdbc.properties属性文件  <context:property-placeholder location="jdbc.properties"/>-->
+    <!--    【步骤四】：在配置连接池Bean的地方使用EL表达式获取jdbc.properties属性文件中的值-->
+    <!--    说明：idea自动识别${}加载的属性值，需要手工点击才可以查阅原始书写格式-->
+
+    <!-- 在applicationContext.xml中加载jdbc.properties属性文件 -->
+    <!--    <context:property-placeholder location="classpath:jdbc.properties"/>-->
+    <!--    <context:property-placeholder location="classpath:*.properties"/>-->
+    <context:property-placeholder location="jdbc.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--  在xml文件中配置DruidDataSource连接池Bean对象，这里的value属性是可以使用配置文件进行传递-->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+<!-- 如果属性文件中配置的不是jdbc.username，而是username=root666，那么使用${username}获取到的不是root666，而是计算机的名称.-->
+
+</beans>

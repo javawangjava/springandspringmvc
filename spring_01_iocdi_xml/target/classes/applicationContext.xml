@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    在xml配置文件中使用bean标签来定义bean对象-->
+    <!--
+    bean标签：表示配置bean。
+    1.bean的id属性是bean对象的唯一标识。bean的id是bean对象所在的实现类类名，或者对象的实现类的父接口的接口名【一般选接口名，这样后面实现类重写也会解耦合】，注意id是小驼峰，类名接口名是大驼峰。
+    bean在IOC容器中的默认名称就是将类名或者实现类的父接口名的大驼峰改为对应的小驼峰。
+    2.bean对象的属性class表示bean对象的类型，class就是bean对象所在的实现类的类型，这里写实现类的全路径类名(实现类参才能实例化创建对象，接口不能创建对象)。
+    -->
+
+    <!--    后面开发时 bean对象一般是单例模式singleton，spring默认是单例模式,单例模式可以省略-->
+    <!--    <bean id="accountDao" class="com.wang.dao.impl.AccountDaoImpl" scope="singleton"/>-->
+    <!--    配置一个bean,说明bean对象的id,说明bean对象的类型class。-->
+    <bean id="accountDao" class="com.wang.dao.impl.AccountDaoImpl"/>
+
+    <!--    配置有依赖关系的bean对象的关系-->
+    <bean id="accountService" class="com.wang.service.impl.AccountServiceImpl">
+        <!--在com.wang.service.impl.AccountServiceImpl中定义了accountDao对象【对象也是变量】
+       这时候将那么非本类的对象accountDao就看作本类对象的属性。
+       -->
+        <!--
+           property标签：表示配置当前bean的属性，下面是引用类型变量的配置。将非本类的对象看作本类对象的实例成员变量【属性】
+           name属性：表示配置哪一个具体的属性,name属性是当前bean中id对应的实现类中定义的非本类bean对象的对象名【变量名】。
+           【也是当前bean中id对应的实现类中setXxx方法中去掉set后首字母小写部分，因为要是按照规范来写setter和对应的变量是一一对应的】
+             [注意变量声明小驼峰，在属性中的name 属性一定是小驼峰。]
+           ref属性：表示参照哪一个bean,ref对应的是另一个bean对象的id【通过id找bean对象】.
+       -->
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,6 @@
+com\wang\domain\Book.class
+com\wang\controller\UserRestController.class
+com\wang\controller\BookFastRestController.class
+com\wang\config\SpringMvcConfig.class
+com\wang\domain\User.class
+com\wang\config\ServletContainersInitConfigOriginal.class

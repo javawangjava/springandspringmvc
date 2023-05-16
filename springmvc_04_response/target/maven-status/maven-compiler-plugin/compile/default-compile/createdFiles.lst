@@ -1,0 +1,4 @@
+com\wang\controller\UserResponseController.class
+com\wang\config\SpringMvcConfig.class
+com\wang\domain\User.class
+com\wang\config\ServletContainersInitConfig.class

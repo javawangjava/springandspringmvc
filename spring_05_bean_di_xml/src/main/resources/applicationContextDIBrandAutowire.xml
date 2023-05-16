@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  在xml配置文件中使用bean标签来定义bean对象。
+            bean标签：表示配置bean
+            1.bean的id属性是bean对象的唯一标识。bean的id是bean对象所在的实现类类名，或者对象的实现类的父接口的接口名【一般选接口名，这样后面实现类重写也会解耦合】，注意id是小驼峰，类名接口名是大驼峰。
+            bean在IOC容器中的默认名称就是将类名或者实现类的父接口名的大驼峰改为对应的小驼峰。
+            2.bean对象的属性class表示bean对象的类型，class就是bean对象所在的实现类的类型，这里写实现类的全路径类名(实现类参才能实例化创建对象，接口不能创建对象)。
+    -->
+
+    <!--  在bean对象的id对应的实现类中声明了简单类型的变量，在xml文件中利用property标签来设置name属性和value属性。
+           property标签：表示配置当前bean的属性。
+           name属性：表示配置哪一个具体的属性,name属性是当前bean中id对应的实现类中定义的简单类型变量的变量名；
+           【也是当前bean中id对应的实现类中setXxx方法中去掉set后首字母小写部分，因为要是按照规范来写setter和对应的变量是一一对应的】。
+           [注意变量声明小驼峰，在属性中的name 属性一定是小驼峰。]
+           value属性:表示给简单类型变量（包括基本数据类型和String)设置的参数值。
+     -->
+
+    <!--  在xml文件中利用property标签来设置name属性
+            下面是在bean对象accountDao中声明了简单类型的变量，在xml文件中利用property标签来设置name属性和value属性-->
+    <bean id="brandDao" class="com.wang.dao.impl.BrandDaoImpl">
+        <property name="brandId" value="10"/>
+        <property name="brandName" value="华为"/>
+    </bean>
+
+
+    <!--  在bean对象的id对应的实现类中声明了引用类型的变量，在xml文件中使用autowire来实现引用类型的自动装配。-->
+
+    <bean id="brandService" class="com.wang.service.impl.BrandServiceImpl" autowire="byType">
+
+    </bean>
+</beans>

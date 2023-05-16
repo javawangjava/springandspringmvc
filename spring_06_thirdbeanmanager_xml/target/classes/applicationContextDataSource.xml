@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  管理DruidDataSource 对象-->
+    <!--  在xml文件中配置DruidDataSource连接池Bean对象，这里的value属性是可以使用配置文件进行传递-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db4?useSSL=false"/>
+        <property name="username" value="root"/>
+        <property name="password" value="1234"/>
+
+    </bean>
+</beans>

@@ -1,0 +1,8 @@
+com\wang\controller\UserController.class
+com\wang\dao\UserDao.class
+com\wang\config\SpringMvcConfig.class
+com\wang\config\ServletContainersInitConfigOriginal.class
+com\wang\config\SpringConfig.class
+com\wang\service\impl\UserServiceImpl.class
+com\wang\domain\User.class
+com\wang\service\UserService.class

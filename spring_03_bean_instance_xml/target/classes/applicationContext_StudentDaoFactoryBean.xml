@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    在xml配置文件中使用bean标签来定义bean对象-->
+    <!--
+    bean标签：表示配置bean
+    1.bean的id属性是bean对象的唯一标识。bean的id是bean对象所在的实现类类名，或者对象的实现类的父接口的接口名【一般选接口名，这样后面实现类重写也会解耦合】，注意id是小驼峰，类名接口名是大驼峰。
+    bean在IOC容器中的默认名称就是将类名或者实现类的父接口名的大驼峰改为对应的小驼峰。
+    2.bean对象的属性class表示bean对象的类型，class就是bean对象所在的实现类的类型，这里写实现类的全路径类名(实现类参才能实例化创建对象，接口不能创建对象)。
+    -->
+
+    <!-- 方式四：使用FactoryBean实例化bean   实用-->
+    <bean id="studentDao" class="com.wang.factory.StudentDaoFactoryBean"/>
+
+</beans>
